@@ -8,7 +8,7 @@ body {
     box-sizing: border-box;
 }
 
-img {
+.logo {
     width: 180px;
     margin-top: 3%;
     margin-left: 9%;
@@ -16,8 +16,8 @@ img {
 
 
 main {
-    margin-left: 120px;
-    margin-right: 120px;
+    margin-left: 9%;
+    margin-right: 9%;
 }
 
 .title {
