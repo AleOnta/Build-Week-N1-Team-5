@@ -20,15 +20,15 @@ body {
 
 header .logo {
   margin-top: 3%;
-  margin-left: 7%;
+  margin-left: 9%;
   margin-bottom: 70px;
   width: 180px;
 }
 /* MAIN */
 
 main {
-  margin-left: 120px;
-  margin-right: 120px;
+  margin-left: 9px;
+  margin-right: 9px;
   text-align: center;
 }
 
@@ -44,13 +44,13 @@ main .title {
 }
 
 .first-section .subtitle {
-  margin-left: 25%;
-  margin-right: 25%;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 /* SECOND SECTION */
 
 .second-section input {
-  width: 60%;
+  width: 70%;
   font-size: 1rem;
   margin-bottom: 70px;
   height: 30px;
@@ -59,6 +59,7 @@ main .title {
   background-color: rgba(250, 250, 250, 0);
   color: white;
   padding-left: 30px;
+  outline: none;
 }
 
 .second-section .button-container .button {
@@ -76,4 +77,13 @@ main .title {
 .second-section .button-container .button:hover {
   cursor: pointer;
   opacity: 0.8;
+}
+
+.star-image {
+  filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%)
+    contrast(80%);
+}
+
+.star-image.selected {
+  filter: unset;
 }
