@@ -102,6 +102,8 @@ let answerDisplayerC = document.getElementById("answer_c");
 let answerDisplayerD = document.getElementById("answer_d");
 
 answerDisplayerA.addEventListener("click", incrementIndex);
+answerDisplayerA.addEventListener("click", correctAnswer);
+//answerDisplayerA.addEventListener("click", counterQuestion);
 answerDisplayerB.addEventListener("click", incrementIndex);
 answerDisplayerC.addEventListener("click", incrementIndex);
 answerDisplayerD.addEventListener("click", incrementIndex);
@@ -115,12 +117,19 @@ function incrementIndex() {
 
 let punteggio = 0;
 
-function incrementScore() {
-  punteggio += 1;
+function correctAnswer() {
+  return (punteggio += 1);
 }
 
 function redirectToResult() {
   location.replace("./ResultPage.html");
+}
+
+function counterQuestion() {
+  const counter = document.getElementById("counter");
+  const tot = questions.length;
+  let newNum = num + 1;
+  return (counter.innerHTML = `Question ${newNum} / ${tot}`);
 }
 
 const randomQuestion = (array) => {
@@ -145,7 +154,14 @@ const randomQuestion = (array) => {
       answerDisplayerD.classList.remove("missingAnswers");
       answerDisplayerD.innerText = currentAnswerD;
 
+      counterQuestion();
+
+      console.log("domanda n.", num);
+      console.log("punteggio", punteggio);
+
       return {
+        num,
+        punteggio,
         questionDisplayer,
         answerDisplayerA,
         answerDisplayerB,
@@ -165,7 +181,14 @@ const randomQuestion = (array) => {
       answerDisplayerC.classList.add("missingAnswers");
       answerDisplayerD.classList.add("missingAnswers");
 
+      counterQuestion();
+
+      console.log("domanda n.", num);
+      console.log("punteggio", punteggio);
+
       return {
+        num,
+        punteggio,
         questionDisplayer,
         answerDisplayerA,
         answerDisplayerB,
@@ -177,4 +200,5 @@ const randomQuestion = (array) => {
     answerDisplayerC.addEventListener("click", redirectToResult());
     answerDisplayerD.addEventListener("click", redirectToResult());
   }
+  return num;
 };
