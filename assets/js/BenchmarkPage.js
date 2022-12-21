@@ -110,7 +110,7 @@ answerDisplayerD.addEventListener("click", incrementIndex);
 
 let num = 0;
 
-function incrementIndex(event) {
+function incrementIndex() {
   randomQuestion(questions);
   num += 1;
 }
@@ -127,9 +127,9 @@ function redirectToResult() {
 
 function counterQuestion() {
   const counter = document.getElementById("counter");
-  incrementIndex(num);
-  let tot = questions.length;
-  return (counter.innerHTML = `Question ${num} / ${tot}`);
+  const tot = questions.length;
+  let newNum = num + 1;
+  return (counter.innerHTML = `Question ${newNum} / ${tot}`);
 }
 
 const randomQuestion = (array) => {
@@ -151,6 +151,8 @@ const randomQuestion = (array) => {
       let currentAnswerD = array[num].incorrect_answers[2];
       answerDisplayerD.classList.remove("missingAnswers");
       answerDisplayerD.innerText = currentAnswerD;
+
+      counterQuestion();
 
       console.log("domanda n.", num);
       console.log("punteggio", punteggio);
@@ -177,6 +179,8 @@ const randomQuestion = (array) => {
       answerDisplayerC.classList.add("missingAnswers");
       answerDisplayerD.classList.add("missingAnswers");
 
+      counterQuestion();
+
       console.log("domanda n.", num);
       console.log("punteggio", punteggio);
 
@@ -196,5 +200,3 @@ const randomQuestion = (array) => {
   }
   return num;
 };
-
-counterQuestion();
