@@ -2,10 +2,14 @@ body {
     background-image: url(../image/bg.jpg);
     background-size: cover;
     font-family: 'Outfit', sans-serif;
-    color: white;
+    color: #E7E7EB;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+b {
+    color: rgba(255, 255, 255, 0.911);
 }
 
 .logo {
@@ -27,34 +31,82 @@ main {
     line-height: 0.8;
 }
 
+section {
+    color: rgba(255, 255, 255, 0.762);
+}
+
+main  p {
+    margin-right: 50%;
+}
+
 h3 {
     display: inline;
     font-size: 2rem;
     color: #D20094 ;
 }
 
-h3 > p {
-    margin-right: 500px;
+ul {
+    margin-top: 55px;
+}
+
+ul li {
+    position: relative;
+    right: 21px;
+}
+
+.boxContainer input {
+    opacity: 0;
+    margin-right: 7px;
 }
 
 
-.button-section p:last-of-type {
+
+.boxContainer {
     display: inline-block;
+    padding-left: 30px;
+    margin-top: 50px;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
 }
 
-
-input[type = "checkbox"] {
-    width: 20px;
-    height: 20px;
-    color: black;
+.boxContainer .checkmark {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid white;
+    position: absolute;
+    left: 28px;
 }
 
-label input {
-    margin-right: 10px;
-    background-color: black;
-    width: 26px;
-    height: 26px;
+.boxContainer input:checked + .checkmark {
+    background-color: #2196fc;
 }
+
+.boxContainer:hover.checkmark {
+    background-color: #ccc;
+}
+
+.boxContainer input:checked + .checkmark::after{
+    content: "";
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    border-left: 2px solid white;
+    border-bottom: 2px solid white;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+
+}
+
+.button-section {
+    display: inline-block;
+    position: relative;
+    right: 36px;
+}
+
 
 button {
     background-color: #00FFFF;
@@ -63,12 +115,14 @@ button {
     box-shadow: -0px -0px 30px 5px #00ffffaa;
     font-weight: 700;
     display: inline-block;
-    margin-left: 80%;
+    margin-left: 150%;
     font-size: 20px;
-    padding-right: 6%;
-    padding-left: 6%;
-    padding-top: 2%;
-    padding-bottom: 2%;
+    padding-right: 9%;
+    padding-left: 9%;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    position: relative;
+    bottom: 40px;
 }
 
 button:hover {
