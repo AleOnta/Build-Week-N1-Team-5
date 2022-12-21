@@ -102,6 +102,8 @@ let answerDisplayerC = document.getElementById("answer_c");
 let answerDisplayerD = document.getElementById("answer_d");
 
 answerDisplayerA.addEventListener("click", incrementIndex);
+answerDisplayerA.addEventListener("click", correctAnswer);
+//answerDisplayerA.addEventListener("click", counterQuestion);
 answerDisplayerB.addEventListener("click", incrementIndex);
 answerDisplayerC.addEventListener("click", incrementIndex);
 answerDisplayerD.addEventListener("click", incrementIndex);
@@ -115,15 +117,19 @@ function incrementIndex(event) {
 
 let punteggio = 0;
 
-// function correctAnswer() {
-//   console.log(incrementIndex(click));
-// }
-
-// correctAnswer();
-// console.log(punteggio);
+function correctAnswer() {
+  return (punteggio += 1);
+}
 
 function redirectToResult() {
   location.replace("./ResultPage.html");
+}
+
+function counterQuestion() {
+  const counter = document.getElementById("counter");
+  incrementIndex(num);
+  let tot = questions.length;
+  return (counter.innerHTML = `Question ${num} / ${tot}`);
 }
 
 const randomQuestion = (array) => {
@@ -146,7 +152,12 @@ const randomQuestion = (array) => {
       answerDisplayerD.classList.remove("missingAnswers");
       answerDisplayerD.innerText = currentAnswerD;
 
+      console.log("domanda n.", num);
+      console.log("punteggio", punteggio);
+
       return {
+        num,
+        punteggio,
         questionDisplayer,
         answerDisplayerA,
         answerDisplayerB,
@@ -166,7 +177,12 @@ const randomQuestion = (array) => {
       answerDisplayerC.classList.add("missingAnswers");
       answerDisplayerD.classList.add("missingAnswers");
 
+      console.log("domanda n.", num);
+      console.log("punteggio", punteggio);
+
       return {
+        num,
+        punteggio,
         questionDisplayer,
         answerDisplayerA,
         answerDisplayerB,
@@ -178,4 +194,7 @@ const randomQuestion = (array) => {
     answerDisplayerC.addEventListener("click", redirectToResult());
     answerDisplayerD.addEventListener("click", redirectToResult());
   }
+  return num;
 };
+
+counterQuestion();
