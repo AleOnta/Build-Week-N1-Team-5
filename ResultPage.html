@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.1.1/dist/chart.umd.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com/" />
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet" />
@@ -24,15 +25,19 @@
             <p class="percentage">50.0%</p>
             <p id="correct-recap">4/8 questions</p>
           </div>
-          <div class="circle">
+          <div id="myChartContainer">
+            <canvas id="myChart"></canvas>
             <div class="recap answers">
               <p>Congratulations!</p>
               <p id="outcome">You ******* the exams</p>
               <p>
-                We'll send you the certificate in few minutes. Check your email (including promotions / spam folder)
+                We'll send you the certificate<br />
+                in few minutes. <br />Check your email (including<br />
+                promotions / spam folder)
               </p>
             </div>
           </div>
+
           <div class="missed answers">
             <p>Wrong</p>
             <p class="percentage">50.0%</p>
@@ -40,7 +45,31 @@
           </div>
         </section>
       </div>
-      <button id="rating">RATE US</button>
+      <button id="rating"><a href="./FeedbackPage.html">RATE US</a></button>
     </main>
+    <script>
+      const correctAnswers = 8;
+      const wrongAnswers = 5 - correctAnswers;
+      const myAnswers = [correctAnswers, wrongAnswers];
+      const ctx = document.getElementById("myChart");
+
+      const data = {
+        datasets: [
+          {
+            label: "# of Answers",
+            data: myAnswers,
+            backgroundColor: ["#900080", "#00ffff"],
+            borderColor: ["#900080", "#00ffff"],
+            borderWidth: 1,
+            cutout: "75%",
+          },
+        ],
+      };
+
+      new Chart(ctx, {
+        type: "doughnut",
+        data,
+      });
+    </script>
   </body>
 </html>
