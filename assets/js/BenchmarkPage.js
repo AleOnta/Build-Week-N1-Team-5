@@ -108,19 +108,16 @@ answerDisplayerD.addEventListener("click", incrementIndex);
 
 let num = 0;
 
-function incrementIndex(event) {
+function incrementIndex() {
   randomQuestion(questions);
   num += 1;
 }
 
 let punteggio = 0;
 
-// function correctAnswer() {
-//   console.log(incrementIndex(click));
-// }
-
-// correctAnswer();
-// console.log(punteggio);
+function incrementScore() {
+  punteggio += 1;
+}
 
 function redirectToResult() {
   location.replace("./ResultPage.html");
@@ -134,6 +131,8 @@ const randomQuestion = (array) => {
 
       let currentAnswerA = array[num].correct_answer;
       answerDisplayerA.innerText = currentAnswerA;
+
+      //crea un for loop per le tre errate
 
       let currentAnswerB = array[num].incorrect_answers[0];
       answerDisplayerB.innerText = currentAnswerB;
