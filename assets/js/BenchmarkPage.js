@@ -5,11 +5,7 @@ const questions = [
     difficulty: "easy",
     question: "What does CPU stand for?",
     correct_answer: "Central Processing Unit",
-    incorrect_answers: [
-      "Central Process Unit",
-      "Computer Personal Unit",
-      "Central Processor Unit",
-    ],
+    incorrect_answers: ["Central Process Unit", "Computer Personal Unit", "Central Processor Unit"],
   },
   {
     category: "Science: Computers",
@@ -32,8 +28,7 @@ const questions = [
     category: "Science: Computers",
     type: "boolean",
     difficulty: "easy",
-    question:
-      "Pointers were not used in the original C programming language; they were added later on in C++.",
+    question: "Pointers were not used in the original C programming language; they were added later on in C++.",
     correct_answer: "False",
     incorrect_answers: ["True"],
   },
@@ -41,8 +36,7 @@ const questions = [
     category: "Science: Computers",
     type: "multiple",
     difficulty: "easy",
-    question:
-      "What is the most preferred image format used for logos in the Wikimedia database?",
+    question: "What is the most preferred image format used for logos in the Wikimedia database?",
     correct_answer: ".svg",
     incorrect_answers: [".png", ".jpeg", ".gif"],
   },
@@ -52,18 +46,13 @@ const questions = [
     difficulty: "easy",
     question: "In web design, what does CSS stand for?",
     correct_answer: "Cascading Style Sheet",
-    incorrect_answers: [
-      "Counter Strike: Source",
-      "Corrective Style Sheet",
-      "Computer Style Sheet",
-    ],
+    incorrect_answers: ["Counter Strike: Source", "Corrective Style Sheet", "Computer Style Sheet"],
   },
   {
     category: "Science: Computers",
     type: "multiple",
     difficulty: "easy",
-    question:
-      "What is the code name for the mobile operating system Android 7.0?",
+    question: "What is the code name for the mobile operating system Android 7.0?",
     correct_answer: "Nougat",
     incorrect_answers: ["Ice Cream Sandwich", "Jelly Bean", "Marshmallow"],
   },
@@ -87,116 +76,147 @@ const questions = [
     category: "Science: Computers",
     type: "multiple",
     difficulty: "easy",
-    question:
-      "Which programming language shares its name with an island in Indonesia?",
+    question: "Which programming language shares its name with an island in Indonesia?",
     correct_answer: "Java",
     incorrect_answers: ["Python", "C", "Jakarta"],
   },
 ];
 
-let questionDisplayer = document.getElementById("question");
+// Created the variables to define the fathers of the new elements
+const questionContainer = document.getElementById("question");
+const answersFather = document.getElementById("answers");
+const myButtonsCollection = document.getElementsByTagName("button");
+const myButtonsArray = Array.from(myButtonsCollection);
 
-let answerDisplayerA = document.getElementById("answer_a");
-let answerDisplayerB = document.getElementById("answer_b");
-let answerDisplayerC = document.getElementById("answer_c");
-let answerDisplayerD = document.getElementById("answer_d");
+// Create a function that calculate the score of the test based on the picked answers of the user
+let score = 0;
+let globalscore = 0;
 
-answerDisplayerA.addEventListener("click", incrementIndex);
-answerDisplayerA.addEventListener("click", correctAnswer);
-//answerDisplayerA.addEventListener("click", counterQuestion);
-answerDisplayerB.addEventListener("click", incrementIndex);
-answerDisplayerC.addEventListener("click", incrementIndex);
-answerDisplayerD.addEventListener("click", incrementIndex);
+let buttons = document.getElementsByTagName("button");
+for (let i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener("click", function (event) {
+    let buttonValue = event.target.textContent;
+    if (buttonValue === questions[num - 1].correct_answer) {
+      score += 1;
+      globalscore = score;
+    }
+  });
+}
 
+// Add eventListener for each button in the html
+for (let i = 0; i < myButtonsArray.length; i++) {
+  myButtonsArray[i].addEventListener("click", incrementIndex);
+}
+
+// Create an empty array to store other array containing all the possible answer to a specific question.
+const questionsArray = [];
+
+for (let i = 0; i < questions.length; i++) {
+  let allAnswers = questions[i].incorrect_answers;
+  allAnswers.push(questions[i].correct_answer);
+  let shuffled = allAnswers
+    .map((value) => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value);
+  questionsArray.push(shuffled);
+}
+
+// Created an index for the question
 let num = 0;
-
 function incrementIndex() {
-  randomQuestion(questions);
+  myQuestionary();
   num += 1;
 }
 
-let punteggio = 0;
-
-function correctAnswer() {
-  return (punteggio += 1);
-}
-
-function redirectToResult() {
-  location.replace("./ResultPage.html");
-}
-
+// Create a function that display the question number on the bottom of the webpage
 function counterQuestion() {
   const counter = document.getElementById("counter");
-  const tot = questions.length;
+  const questionsAmount = questions.length;
   let newNum = num + 1;
-  return (counter.innerHTML = `Question ${newNum} / ${tot}`);
+  return (counter.innerHTML = `Question ${newNum} / ${questionsAmount}`);
 }
 
-const randomQuestion = (array) => {
-  if (num < array.length) {
-    if (array[num].incorrect_answers.length === 3) {
-      let currentQuestion = array[num].question;
-      questionDisplayer.innerText = currentQuestion;
+// Create a function that replace the question text at every button clicked
+const questionDisplayer = () => {
+  if (num === 10) {
+    questionContainer.innerText = questions[num - 1].question;
+  } else {
+    questionContainer.innerText = questions[num].question;
+  }
+};
 
-      let currentAnswerA = array[num].correct_answer;
-      answerDisplayerA.innerText = currentAnswerA;
+// script to passing the global score obtained to the result page
 
-      let currentAnswerB = array[num].incorrect_answers[0];
-      answerDisplayerB.innerText = currentAnswerB;
+let url = "http://127.0.0.1:5500/Build-Week-N1-Team-5/ResultPage.html";
+const objectResult = {};
 
-      let currentAnswerC = array[num].incorrect_answers[1];
-      answerDisplayerC.classList.remove("missingAnswers");
-      answerDisplayerC.innerText = currentAnswerC;
+const passingScore = () => {
+  objectResult.correct = globalscore;
+  objectResult.wrong = 10 - globalscore;
+};
 
-      let currentAnswerD = array[num].incorrect_answers[2];
-      answerDisplayerD.classList.remove("missingAnswers");
-      answerDisplayerD.innerText = currentAnswerD;
+let queryString = "";
+const urlParams = () => {
+  const searchParams = new URLSearchParams(objectResult);
+  queryString = searchParams.toString();
+};
 
-      counterQuestion();
+const passingValue = (obj) => {
+  for (let i = 0; i < myButtonsArray.length; i++) {
+    myButtonsArray[i].addEventListener("click", () => {
+      window.location.href = url + "?" + obj;
+    });
+  }
+};
 
-      console.log("domanda n.", num);
-      console.log("punteggio", punteggio);
-
-      return {
-        num,
-        punteggio,
-        questionDisplayer,
-        answerDisplayerA,
-        answerDisplayerB,
-        answerDisplayerC,
-        answerDisplayerD,
-      };
-    } else {
-      let currentQuestion = array[num].question;
-      questionDisplayer.innerText = currentQuestion;
-
-      let currentAnswerA = array[num].correct_answer;
-      answerDisplayerA.innerText = currentAnswerA;
-
-      let currentAnswerB = array[num].incorrect_answers[0];
-      answerDisplayerB.innerText = currentAnswerB;
-
-      answerDisplayerC.classList.add("missingAnswers");
-      answerDisplayerD.classList.add("missingAnswers");
-
-      counterQuestion();
-
-      console.log("domanda n.", num);
-      console.log("punteggio", punteggio);
-
-      return {
-        num,
-        punteggio,
-        questionDisplayer,
-        answerDisplayerA,
-        answerDisplayerB,
-      };
+//Create a function that replace the answer text in each button at click event.
+const answersDisplayer = () => {
+  if (num === 10) {
+    for (let i = 0; i < 4; i++) {
+      const currentQuestionArray = questionsArray[num - 1];
+      myButtonsArray[i].innerText = currentQuestionArray[i];
+      myButtonsArray[i].classList.remove("missingAnswers");
     }
   } else {
-    answerDisplayerA.addEventListener("click", redirectToResult());
-    answerDisplayerB.addEventListener("click", redirectToResult());
-    answerDisplayerC.addEventListener("click", redirectToResult());
-    answerDisplayerD.addEventListener("click", redirectToResult());
+    if (questionsArray[num].length === 4) {
+      for (let i = 0; i < 4; i++) {
+        const currentQuestionArray = questionsArray[num];
+        myButtonsArray[i].innerText = currentQuestionArray[i];
+        myButtonsArray[i].classList.remove("missingAnswers");
+      }
+    } else {
+      for (let i = 0; i < 4; i++) {
+        if (i < 2) {
+          // insert the correct text inside the 2 buttons needed
+          const currentQuestionArray = questionsArray[num];
+          myButtonsArray[i].innerText = currentQuestionArray[i];
+        } else {
+          // add a class to hide the extra buttons
+          myButtonsArray[i].classList.add("missingAnswers");
+        }
+      }
+    }
   }
-  return num;
 };
+
+// Create a function to resume and recall all the functions built for the questionary
+const myQuestionary = () => {
+  if (num < 10) {
+    questionDisplayer();
+    answersDisplayer();
+    counterQuestion();
+    passingScore();
+    urlParams();
+    console.log(queryString);
+  } else {
+    questionDisplayer();
+    answersDisplayer();
+    counterQuestion();
+    passingScore();
+    urlParams();
+    passingValue(queryString);
+    console.log(queryString);
+  }
+};
+
+myQuestionary();
