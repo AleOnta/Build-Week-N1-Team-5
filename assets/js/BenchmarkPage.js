@@ -147,7 +147,7 @@ const questionDisplayer = () => {
 
 // script to passing the global score obtained to the result page
 
-let url = "http://127.0.0.1:5500/Build-Week-N1-Team-5/ResultPage.html";
+let url = "./ResultPage.html";
 const objectResult = {};
 
 const passingScore = () => {
