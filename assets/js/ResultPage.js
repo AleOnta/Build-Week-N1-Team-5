@@ -19,12 +19,39 @@ const wrongPercentage = document.getElementById("wrongPercentage");
 correctPercentage.innerText = percentageCalculator(correctArray[1]) + "%";
 wrongPercentage.innerText = percentageCalculator(wrongArray[1]) + "%";
 
-// Working on the
+// Working on the summary of the questions displayed under the percentage on both sides
 const correctRecap = document.getElementById("correct-recap");
 const wrongRecap = document.getElementById("missed-recap");
 
 correctRecap.innerHTML = `${correctArray[1]} / 10 Questions`;
 wrongRecap.innerHTML = `${wrongArray[1]} / 10 Questions`;
+
+// Working on the central text into the questionary chart
+const firstPcircle = document.getElementById("toYou");
+const secondPcircle = document.getElementById("outcome");
+const thirdPcircle = document.getElementById("sentence");
+
+if (correctArray[1] < 6) {
+  firstPcircle.innerText = "Oops, try again...";
+  secondPcircle.innerText = "You didn't pass the exam";
+  thirdPcircle.innerHTML = `
+  <p id="sentence">
+  You won't receive any certificate<br />
+  until you will pass the exam. <br />Contact your teaching assistant<br />
+  to try again the test.
+</p>
+`;
+} else {
+  firstPcircle.innerText = "Congratulations!";
+  secondPcircle.innerText = "You passed the exams";
+  thirdPcircle.innerHTML = `
+  <p id="sentence">
+  We'll send you the certificate<br />
+  in few minutes. <br />Check your email (including<br />
+  promotions / spam folder)
+</p>
+`;
+}
 
 // Chart parameters and option
 const correctAnswers = correctArray[1];
