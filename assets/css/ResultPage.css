@@ -109,7 +109,12 @@ section {
   line-height: 2rem;
 }
 
-.percentage {
+#correctPercentage {
+  font-size: 1.3em;
+  font-weight: 700;
+}
+
+#wrongPercentage {
   font-size: 1.3em;
   font-weight: 700;
 }

@@ -22,7 +22,7 @@
         <section>
           <div class="correct answers">
             <p>Correct</p>
-            <p class="percentage">50.0%</p>
+            <p id="correctPercentage">50.0%</p>
             <p id="correct-recap">4/8 questions</p>
           </div>
           <div id="myChartContainer">
@@ -40,36 +40,13 @@
 
           <div class="missed answers">
             <p>Wrong</p>
-            <p class="percentage">50.0%</p>
+            <p id="wrongPercentage">50.0%</p>
             <p id="missed-recap">4/8 questions</p>
           </div>
         </section>
       </div>
       <button id="rating"><a href="./FeedbackPage.html">RATE US</a></button>
     </main>
-    <script>
-      const correctAnswers = 8;
-      const wrongAnswers = 5 - correctAnswers;
-      const myAnswers = [correctAnswers, wrongAnswers];
-      const ctx = document.getElementById("myChart");
-
-      const data = {
-        datasets: [
-          {
-            label: "# of Answers",
-            data: myAnswers,
-            backgroundColor: ["#900080", "#00ffff"],
-            borderColor: ["#900080", "#00ffff"],
-            borderWidth: 1,
-            cutout: "75%",
-          },
-        ],
-      };
-
-      new Chart(ctx, {
-        type: "doughnut",
-        data,
-      });
-    </script>
+    <script src="./assets/js/ResultPage.js"></script>
   </body>
 </html>
