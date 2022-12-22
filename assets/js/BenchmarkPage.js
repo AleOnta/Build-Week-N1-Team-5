@@ -96,6 +96,9 @@ let buttons = document.getElementsByTagName("button");
 for (let i = 0; i < buttons.length; i++) {
   buttons[i].addEventListener("click", function (event) {
     let buttonValue = event.target.textContent;
+    if (num === 0) {
+      num = 1;
+    }
     if (buttonValue === questions[num - 1].correct_answer) {
       score += 1;
       globalscore = score;
@@ -132,8 +135,12 @@ function incrementIndex() {
 function counterQuestion() {
   const counter = document.getElementById("counter");
   const questionsAmount = questions.length;
-  let newNum = num + 1;
-  return (counter.innerHTML = `Question ${newNum} / ${questionsAmount}`);
+  if (num < 10) {
+    let newNum = num + 1;
+    return (counter.innerHTML = `Question ${newNum} / ${questionsAmount}`);
+  } else {
+    return (counter.innerHTML = `Question 10 / ${questionsAmount}`);
+  }
 }
 
 // Create a function that replace the question text at every button clicked
@@ -162,11 +169,7 @@ const urlParams = () => {
 };
 
 const passingValue = (obj) => {
-  for (let i = 0; i < myButtonsArray.length; i++) {
-    myButtonsArray[i].addEventListener("click", () => {
-      window.location.href = url + "?" + obj;
-    });
-  }
+  window.location.href = url + "?" + obj;
 };
 
 //Create a function that replace the answer text in each button at click event.
@@ -207,7 +210,6 @@ const myQuestionary = () => {
     counterQuestion();
     passingScore();
     urlParams();
-    console.log(queryString);
   } else {
     questionDisplayer();
     answersDisplayer();
@@ -215,7 +217,6 @@ const myQuestionary = () => {
     passingScore();
     urlParams();
     passingValue(queryString);
-    console.log(queryString);
   }
 };
 
