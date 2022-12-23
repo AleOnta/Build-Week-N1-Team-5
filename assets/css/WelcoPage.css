@@ -38,10 +38,11 @@ main {
 
 section {
   color: rgba(255, 255, 255, 0.762);
+  font-size: 1.2vw;
 }
 
 main section p {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   width: 65%;
   margin-bottom: 4%;
 }
@@ -53,7 +54,7 @@ h3 {
 }
 
 ul {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   margin-left: 2%;
   line-height: 1.4;
 }
@@ -107,6 +108,7 @@ ul {
   display: inline-block;
   position: relative;
   right: 2.5%;
+  font-size: 1.2vw;
 }
 
 button {
@@ -117,6 +119,7 @@ button {
   font-weight: 700;
   display: inline-block;
   margin-left: 150%;
+  font-family: "Outfit", sans-serif;
   font-size: 20px;
   padding-right: 9%;
   padding-left: 9%;
