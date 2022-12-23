@@ -91,7 +91,7 @@ const timer = document.querySelector(".timer");
 // input for the timer
 const hr = 0;
 const min = 0;
-const sec = 5;
+const sec = 200;
 
 const hour = hr * 3600000;
 const minutes = min * 60000;
@@ -120,12 +120,22 @@ function countDownTimer() {
   // timer
   const hrs = Math.floor((remainingTime / (1000 * 60 * 60)) % 24);
   const min = Math.floor((remainingTime / (1000 * 60)) % 60);
-  const sec = Math.floor((remainingTime / 1000) % 60);
+  const sec = Math.floor(remainingTime / 1000);
 
   timer.innerHTML = `<div>${sec}</div>`;
   // end
   if (remainingTime < 0) {
-    //clearInterval(timerLoop);
+    clearInterval(timerLoop);
+    semicircles[0].style.display = "none";
+    semicircles[1].style.display = "none";
+    semicircles[2].style.display = "none";
+
+    timer.innerHTML = `
+    <!--<div class="timer-label">SECONDS</div>-->
+    <div>0</div>
+    <!--<div class="timer-label">REMAINING</div>-->
+    `;
+
     incrementIndex();
   }
 }
