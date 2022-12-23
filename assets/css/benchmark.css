@@ -141,7 +141,14 @@ main {
 #question {
   margin-top: 1em;
   margin-bottom: 1em;
-  font-size: 3rem;
+  min-height: 200px;
+  height: 30vh;
+  padding-right: 5%;
+  padding-left: 5%;
+  font-size: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 button {
@@ -177,4 +184,5 @@ button:hover {
 
 #counter {
   margin-top: 5vw;
+  font-weight: 500;
 }
