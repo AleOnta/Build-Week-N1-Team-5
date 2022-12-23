@@ -29,7 +29,7 @@ main {
 }
 
 .title {
-  font-size: 400;
+  font-weight: 400;
   font-size: 5rem;
   width: 50%;
   line-height: 0.8;
@@ -40,8 +40,9 @@ section {
   color: rgba(255, 255, 255, 0.762);
 }
 
-main p {
-  width: 50%;
+main section p {
+  font-family: 'Inter', sans-serif;
+  width: 65%;
   margin-bottom: 4%;
 }
 
@@ -52,6 +53,7 @@ h3 {
 }
 
 ul {
+  font-family: 'Inter', sans-serif;
   margin-left: 2%;
   line-height: 1.4;
 }
